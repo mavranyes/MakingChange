@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int topDown(vector <int> denoms, int problem) {
+int topDownMemo(vector <int> denoms, int problem) {
 	int solution;
 
 	return solution;
