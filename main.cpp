@@ -65,9 +65,16 @@ int main() {
 	*/
 
 	vector <string> solutions;
-	solutions = bottomUp(denoms, problems);
-	//solutions = topDownMemo(denoms, problems);
-	//solutions = topDown(denoms, problems);
+	for (int i = 0; i < problems.size(); i++) {
+		solutions.push_back(bottomUp(denoms, problems[i]));
+	}
+	//for (int i = 0; i < problems.size(); i++) {
+	//	solutions.push_back(topDown(denoms, problems[i]));
+	//}
+
+	//for (int i = 0; i < problems.size(); i++) {
+	//	solutions.push_back(topDownMemo(denoms, problems[i]));
+	//}
 
 	return 0;
 }
