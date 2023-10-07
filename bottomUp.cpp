@@ -4,9 +4,8 @@
 
 using namespace std;
 
-int bottomUp(vector <int> denoms, int problem) {
+int topDown(vector <int> denoms, int problem) {
 	int solution;
-
 
 	return solution;
 }
