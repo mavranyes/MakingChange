@@ -19,7 +19,7 @@ int main() {
 	while (getline(input, line)) {
 		file.push_back(line);
 		}
-	for (int i = 0; i < file.size; i++) {
+	for (int i = 0; i < file.size(); i++) {
 		cout << file[i] << "/n";
 		}
 		// From stdin
