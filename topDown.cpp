@@ -1,7 +1,4 @@
 #include <iostream>
-
-using namespace std;
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -22,10 +19,7 @@ int main() {
 	for (int i = 0; i < file.size(); i++) {
 		cout << file[i] << "/n";
 		}
-		// From stdin
-
-
-
+		////// From stdin
 
 	return 0;
 }
