@@ -10,17 +10,16 @@ int main() {
 	// Reading Input
 	string line = "";
 	vector <string> file;
-		// From File
-	
+	// From File
+
 	ifstream input("test.txt", ios::in);
 	while (getline(input, line)) {
 		file.push_back(line);
-		}
+	}
 	for (int i = 0; i < file.size(); i++) {
-		cout << file[i] << "/n";
-		}
-		////// From stdin
+		cout << file[i] << "\n";
+	}
+	// From stdin
 
 	return 0;
 }
-
