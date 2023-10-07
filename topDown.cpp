@@ -14,10 +14,12 @@ int main() {
 	vector <int> file;
 	
 	// From File
+	
 	ifstream input("test.txt", ios::in);
 	while (getline(input, line)) {
 		file.push_back(stoi(line, nullptr, 10));
 	}
+	
 	/*
 	for (int i = 0; i < file.size(); i++) {
 		cout << file[i] << "\n";
@@ -25,10 +27,17 @@ int main() {
 	*/
 	
 	// From stdin
+	/*
+	int x;
+	cout << "Enter the input below: \n";
+	while (cin >> x) {
+		file.push_back(x);
+	}
+	*/
 
 	//Get n from the first line of the input
 	int n = file[0];
-	//cout << "N: " << n << "\n";		//Print n
+	cout << "N: " << n << "\n";		//Print n
 
 	//Populate denoms vector with the next n lines of input
 	vector <int> denoms;
