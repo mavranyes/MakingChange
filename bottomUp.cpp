@@ -5,11 +5,8 @@
 
 using namespace std;
 
-vector <string> bottomUp(vector <int> denoms, vector <int> problems) {
-	vector <string> solutions;
-	for (int i = 0; i < problems.size(); i++) {
-		
+string bottomUp(vector <int> denoms, int problem) {
+	string solution;
 
-	}
-	return solutions;
+	return solution;
 }
