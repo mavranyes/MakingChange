@@ -36,7 +36,7 @@ int main() {
 
 	//Get n from the first line of the input
 	int n = file[0];
-	cout << "N: " << n << "\n";		//Print n
+	//cout << "N: " << n << "\n";		//Print n
 
 	//Populate denoms vector with the next n lines of input
 	vector <int> denoms;
@@ -64,7 +64,7 @@ int main() {
 	}
 	*/
 
-	vector <int> solutions;
+	vector <string> solutions;
 	for (int i = 0; i < problems.size(); i++) {
 		solutions.push_back(bottomUp(denoms, problems[i]));
 	}

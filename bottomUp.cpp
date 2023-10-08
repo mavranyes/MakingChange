@@ -4,8 +4,8 @@
 
 using namespace std;
 
-int bottomUp(vector <int> denoms, int problem) {
-	int solution;
+string bottomUp(vector <int> denoms, int problem) {
+	string solution;
 	int bestDenom;
 	int sol[problem];
 	int jmpSize[problem];
@@ -19,10 +19,6 @@ int bottomUp(vector <int> denoms, int problem) {
 			if (size < 0) {
 				continue;
 			}
-			// cout << "size: " << size << endl;
-			// cout << "i: " << i << " denom: " << denoms[i] << endl;
-			// cout << "k: " << k << " num: " << sol[size] << endl;
-			// cout << "-----------------------" << endl;
 			if (sol[size] < best) {
 				best = sol[size] + 1;
 				bestDenom = denoms[i];
@@ -32,14 +28,19 @@ int bottomUp(vector <int> denoms, int problem) {
 		sol[k] = best;
 		best = INT_MAX;
 	}
-
-	int denomCount[denoms.size()];
+	//Format Solution
+	solution = to_string(sol[problem]) + " cents = ";
+	int* denomCount = new int[denoms[denoms.size() - 1] + 1]();
 	//Find purse
 	while (problem != 0) {
-		denomCount[denompos]++;
+		denomCount[jmpSize[problem]]++;
 		problem -= jmpSize[problem];
 	}
-
-	solution = sol[problem];
+	//Format Purse output
+	for (int i = denoms.size() - 1; i >= 0; i--) {
+		if (denomCount[denoms[i]] != 0) {
+			solution += to_string(denoms[i]) + ":" + to_string(denomCount[denoms[i]]) + " ";
+		}
+	}
 	return solution;
 }
