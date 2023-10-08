@@ -16,12 +16,17 @@ int bottomUp(vector <int> denoms, int problem) {
 			if (size < 0) {
 				continue;
 			}
-			if (sol[k - denoms[i]] < best) {
-				best = sol[k - denoms[i]] + 1;
+			cout << "size: " << size << endl;
+			cout << "denom: " << denoms[i] << endl;
+			cout << "k: " << k << " num: " << sol[size] << endl;
+			cout << "-----------------------" << endl;
+			if (sol[size] < best) {
+				best = sol[size] + 1;
 			}
 		}
 		sol[k] = best;
 		best = INT_MAX;
 	}
+	solution = sol[problem];
 	return solution;
 }
