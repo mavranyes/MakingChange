@@ -76,5 +76,9 @@ int main() {
 	//	solutions.push_back(topDownMemo(denoms, problems[i]));
 	//}
 
+	for (int i = 0; i < solutions.size(); i++) {
+		cout << "Solution for " << problems[i] << ": \n" << solutions[i] << "\n";
+	}
+
 	return 0;
 }
