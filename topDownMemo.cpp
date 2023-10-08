@@ -39,7 +39,7 @@ string topDownMemo(vector <int> denoms, int problem) {
 	string solution;
 	int best = INT_MAX;
 	int* sol = new int[problem]();
-	int* coins = new int[problem]();
+	//int* coins = new int[problem]();
 	//return to_string(mc(problem));
 	
 	//Base
@@ -57,9 +57,9 @@ string topDownMemo(vector <int> denoms, int problem) {
 		if (size < 0) {//Prevents evaluation of denoms that are too large
 			continue;
 		}
-		coins[size] = stoi(topDownMemo(denoms, size));
-		if (coins[size] < best) {
-			best = coins[size];
+		sol[size] = stoi(topDownMemo(denoms, size));
+		if (sol[size] < best) {
+			best = sol[size];
 		}
 	}
 	sol[problem] = best + 1;
