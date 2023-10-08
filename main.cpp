@@ -73,7 +73,7 @@ int main() {
 	//	solutions.push_back(topDown(denoms, problems[i]));
 	//}
 
-	for (int i = 6; i <= 6/*problems.size()*/; i++) {
+	for (int i = 0; i < 5/*problems.size()*/; i++) {
 		solutions.push_back(topDownMemo(denoms, problems[i]));
 	}
 
