@@ -65,7 +65,7 @@ int main() {
 	*/
 
 	vector <int> solutions;
-	for (int i = 0; i < 1 /*problems.size()*/; i++) {
+	for (int i = 0; i < problems.size(); i++) {
 		solutions.push_back(bottomUp(denoms, problems[i]));
 	}
 	//for (int i = 0; i < problems.size(); i++) {
