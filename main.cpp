@@ -5,12 +5,10 @@
 #include "bottomUp.cpp"
 #include "topDown.cpp"
 #include <climits>
-#include <topDownMemo.h>
 
 using namespace std;
 
 static int* sol = nullptr;
-
 string topDownMemo(vector <int> denoms, int problem) {
 	string solution;
 	int best = INT_MAX;

@@ -3,37 +3,7 @@
 #include <vector>
 
 using namespace std;
-/*
-int* sol;
-int best;
-vector <int> denoms;
 
-int mc(int n) {
-	//Base
-	if (n < 2) {
-		return n;
-	}
-	//Check if solution is found
-	if (sol[n] != 0) {
-		return n;
-	}
-	//Iterate through each denom
-	for (int k = 0; k < denoms.size(); k++) {
-		//cout << denoms[k] << endl;
-		int size = n - denoms[k];
-		if (size < 0) {//Prevents evaluation of denoms that are too large
-			continue;
-		}
-		sol[size] = mc(size);
-		if (sol[size] < best) {
-			best = sol[size];
-		}
-	}
-	// cout << "another here" << endl;
-	sol[n] = best + 1;
-	return sol[n];
-}
-*/
 
 string topDownMemo(vector <int> denoms, int problem) {
 	string solution;
