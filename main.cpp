@@ -8,17 +8,29 @@
 
 using namespace std;
 
-static int* sol = nullptr;
+class man_satchel {
+public:
+	int value;
+	//man_satchel* prevCoin;
+	string prevCoin;
+	man_satchel() {
+		this->value = -1;
+		this->prevCoin = "";
+	}
+};
+
+static man_satchel* sol = nullptr;
+
 string topDownMemo(vector <int> denoms, int problem) {
 	string solution;
 	int best = INT_MAX;
 	
 	//Only initialize array on first recursion
 	if (sol == nullptr) {
-		sol = new int[problem + 1];
-		for (int i = 0; i <= problem; i++) {
-			sol[i] = -1;
-		}
+		sol = new man_satchel[problem + 1]();
+		//for (int i = 0; i <= problem; i++) {
+		//	sol[i].value = -1;
+		//}
 	}
 
 	//Base
@@ -26,8 +38,8 @@ string topDownMemo(vector <int> denoms, int problem) {
 		return to_string(problem);
 	}
 	//Check if solution is found
-	if (sol[problem] != -1) {
-		return to_string(sol[problem]);
+	if (sol[problem].value != -1) {
+		return to_string(sol[problem].value);
 	}
 
 	//Iterate through each denom
@@ -37,12 +49,15 @@ string topDownMemo(vector <int> denoms, int problem) {
 			continue;
 		}
 		int coins = stoi(topDownMemo(denoms, size));
+		sol[problem].prevCoin += to_string(denoms[k]);
+		//Add which object was used to get result
 		if (coins != INT_MAX && (coins + 1) < best) {
 			best = coins + 1;
 		}
 	}
-	sol[problem] = best;
-	return to_string(sol[problem]);
+
+	sol[problem].value = best;
+	return to_string(sol[problem].value);
 }
 
 int main() {
