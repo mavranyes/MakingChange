@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "bottomUp.cpp"
+#include "topDown.cpp"
 #include <climits>
 
 using namespace std;
