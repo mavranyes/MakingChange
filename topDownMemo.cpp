@@ -47,7 +47,7 @@ string topDownMemo(vector <int> denoms, int problem) {
 		return to_string(problem);
 	}
 	//Check if solution is found
-	if (sol[problem] != 0) {
+	if (sol[problem - 1] != 0) {//Can you have sol[problem] if it is initalized with problem size
 		return to_string(problem);
 	}
 
@@ -57,14 +57,16 @@ string topDownMemo(vector <int> denoms, int problem) {
 		if (size < 0) {//Prevents evaluation of denoms that are too large
 			continue;
 		}
+		if (sol[size] != 0) {
+			continue;
+		}
 		sol[size] = stoi(topDownMemo(denoms, size));
 		if (sol[size] < best) {
 			best = sol[size];
 		}
 	}
-	sol[problem] = best + 1;
-	return to_string(sol[problem]);
-	
+	//sol[problem - 1] = best + 1;//THIS CAUSES SEG FAULT
+	return to_string(best + 1);
 }
 
 
