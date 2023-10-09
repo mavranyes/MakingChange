@@ -4,46 +4,10 @@
 #include <vector>
 #include "bottomUp.cpp"
 #include "topDown.cpp"
+#include "topDownMemo.cpp"
 #include <climits>
 
 using namespace std;
-
-static int* sol = nullptr;
-string topDownMemo(vector <int> denoms, int problem) {
-	string solution;
-	int best = INT_MAX;
-	
-	//Only initialize array on first recursion
-	if (sol == nullptr) {
-		sol = new int[problem + 1];
-		for (int i = 0; i <= problem; i++) {
-			sol[i] = -1;
-		}
-	}
-
-	//Base
-	if (problem == 0) {
-		return to_string(problem);
-	}
-	//Check if solution is found
-	if (sol[problem] != -1) {
-		return to_string(sol[problem]);
-	}
-
-	//Iterate through each denom
-	for (int k = 0; k < denoms.size(); k++) {
-		int size = problem - denoms[k];
-		if (size < 0) {//Prevents evaluation of denoms that are too large
-			continue;
-		}
-		int coins = stoi(topDownMemo(denoms, size));
-		if (coins != INT_MAX && (coins + 1) < best) {
-			best = coins + 1;
-		}
-	}
-	sol[problem] = best;
-	return to_string(sol[problem]);
-}
 
 int main() {
 	// Reading Input
@@ -111,15 +75,12 @@ int main() {
 	//}
 
 	for (int i = 0; i < problems.size(); i++) {
-		sol = nullptr;
-		solutions.push_back(topDownMemo(denoms, problems[i]));
+		solutions.push_back(topDownMemo(denoms, problems[i], true));
 	}
 
 	for (int i = 0; i < solutions.size(); i++) {
 		cout << "Solution for " << problems[i] << ": \n" << solutions[i] << "\n";
 	}
-
-	delete sol;
 
 	return 0;
 }

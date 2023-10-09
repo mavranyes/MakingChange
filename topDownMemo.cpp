@@ -4,21 +4,29 @@
 
 using namespace std;
 
-
-string topDownMemo(vector <int> denoms, int problem) {
+string topDownMemo(vector <int> denoms, int problem, bool init) {
 	string solution;
+	static int* sol = nullptr;
 	int best = INT_MAX;
-	int* sol = new int[problem]();
-	//int* coins = new int[problem]();
-	//return to_string(mc(problem));
-	
+
+	//Only initialize array on first recursion
+	if (init) {
+		if (sol != nullptr) {
+			delete sol;
+		} 
+		sol = new int[problem + 1];
+		for (int i = 0; i <= problem; i++) {
+			sol[i] = -1;
+		}
+	}
+
 	//Base
-	if (problem < 2) {
+	if (problem == 0) {
 		return to_string(problem);
 	}
 	//Check if solution is found
-	if (sol[problem - 1] != 0) {//Can you have sol[problem] if it is initalized with problem size
-		return to_string(problem);
+	if (sol[problem] != -1) {
+		return to_string(sol[problem]);
 	}
 
 	//Iterate through each denom
@@ -27,16 +35,13 @@ string topDownMemo(vector <int> denoms, int problem) {
 		if (size < 0) {//Prevents evaluation of denoms that are too large
 			continue;
 		}
-		if (sol[size] != 0) {
-			continue;
-		}
-		sol[size] = stoi(topDownMemo(denoms, size));
-		if (sol[size] < best) {
-			best = sol[size];
+		int coins = stoi(topDownMemo(denoms, size, false));
+		if (coins != INT_MAX && (coins + 1) < best) {
+			best = coins + 1;
 		}
 	}
-	//sol[problem - 1] = best + 1;//THIS CAUSES SEG FAULT
-	return to_string(best + 1);
+	sol[problem] = best;
+	return to_string(sol[problem]);
 }
 
 
