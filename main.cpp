@@ -9,6 +9,58 @@
 
 using namespace std;
 
+class man_satchel {
+public:
+	int value;
+	//man_satchel* prevCoin;
+	string prevCoin;
+	man_satchel() {
+		this->value = -1;
+		this->prevCoin = "";
+	}
+};
+
+static man_satchel* sol = nullptr;
+
+string topDownMemo(vector <int> denoms, int problem) {
+	string solution;
+	int best = INT_MAX;
+	
+	//Only initialize array on first recursion
+	if (sol == nullptr) {
+		sol = new man_satchel[problem + 1]();
+		//for (int i = 0; i <= problem; i++) {
+		//	sol[i].value = -1;
+		//}
+	}
+
+	//Base
+	if (problem == 0) {
+		return to_string(problem);
+	}
+	//Check if solution is found
+	if (sol[problem].value != -1) {
+		return to_string(sol[problem].value);
+	}
+
+	//Iterate through each denom
+	for (int k = 0; k < denoms.size(); k++) {
+		int size = problem - denoms[k];
+		if (size < 0) {//Prevents evaluation of denoms that are too large
+			continue;
+		}
+		int coins = stoi(topDownMemo(denoms, size));
+		sol[problem].prevCoin += to_string(denoms[k]);
+		//Add which object was used to get result
+		if (coins != INT_MAX && (coins + 1) < best) {
+			best = coins + 1;
+		}
+	}
+
+	sol[problem].value = best;
+	return to_string(sol[problem].value);
+}
+
 int main() {
 	// Reading Input
 	string line = "";
