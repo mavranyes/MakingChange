@@ -67,19 +67,16 @@ int main() {
 
 	// From File
 
-
-	/*
 	ifstream input("test.txt", ios::in);
 	while (getline(input, line)) {
 		file.push_back(stoi(line, nullptr, 10));
 	}
-	*/
 
 	// From stdin
-	int x;
-	while (cin >> x) {
-		file.push_back(x);
-	}
+	// int x;
+	// while (cin >> x) {
+	// 	file.push_back(x);
+	// }
 
 	//Get n from the first line of the input
 	int n = file[0];
@@ -121,10 +118,6 @@ int main() {
 
 	for (int i = 0; i < problems.size(); i++) {
 		solutions.push_back(topDownMemo(denoms, problems[i], true));
-	}
-
-	for (int i = 0; i < solutions.size(); i++) {
-		//cout << "Solution for " << problems[i] << ": \n" << solutions[i] << "\n";
 		cout << problems[i] << " cents =";
 		for (int j = denoms.size() - 1; j >= 0; j--) {
 		    if(sol[problems[i]].coin[j]){
@@ -133,6 +126,17 @@ int main() {
         }
         cout << "\n";
 	}
+	//cout << "sol size: " << sol.size() << endl;
+	// for (int i = 0; i < solutions.size(); i++) {
+	// 	//cout << "Solution for " << problems[i] << ": \n" << solutions[i] << "\n";
+	// 	cout << problems[i] << " cents =";
+	// 	for (int j = denoms.size() - 1; j >= 0; j--) {
+	// 	    if(sol[problems[i]].coin[j]){
+    //             cout << " " << denoms[j] << ":" << sol[problems[i]].coin[j];
+	// 	    }
+    //     }
+    //     cout << "\n";
+	// }
 
 	return 0;
 }
