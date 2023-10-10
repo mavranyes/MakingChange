@@ -8,7 +8,7 @@
 #include <climits>
 
 using namespace std;
-
+/*
 class man_satchel {
 public:
 	int value;
@@ -22,7 +22,7 @@ public:
 
 static man_satchel* sol = nullptr;
 
-string topDownMemo(vector <int> denoms, int problem) {
+string topDownMemo(vector <int> denoms, int problem, bool init) {
 	string solution;
 	int best = INT_MAX;
 	
@@ -49,7 +49,7 @@ string topDownMemo(vector <int> denoms, int problem) {
 		if (size < 0) {//Prevents evaluation of denoms that are too large
 			continue;
 		}
-		int coins = stoi(topDownMemo(denoms, size));
+		int coins = stoi(topDownMemo(denoms, size, false));
 		sol[problem].prevCoin += to_string(denoms[k]);
 		//Add which object was used to get result
 		if (coins != INT_MAX && (coins + 1) < best) {
@@ -59,7 +59,7 @@ string topDownMemo(vector <int> denoms, int problem) {
 
 	sol[problem].value = best;
 	return to_string(sol[problem].value);
-}
+}*/
 
 int main() {
 	// Reading Input
