@@ -18,6 +18,90 @@ public:
 
 static man_satchel* sol = nullptr;
 
+string bottomUp(vector <int> denoms, int problem) {
+	string solution;
+	int bestDenom;
+	int sol[problem];
+	int jmpSize[problem];
+	sol[0] = 0;
+	jmpSize[0] = 0;
+	int best = INT_MAX;
+	for (int k = 1; k <= problem; k++) {
+		//Iterate through each denom
+		for (int i = 0; i < denoms.size(); i++) {
+			int size = k - denoms[i];
+			if (size < 0) {
+				continue;
+			}
+			if (sol[size] < best) {
+				best = sol[size] + 1;
+				bestDenom = denoms[i];
+			}
+		}
+		jmpSize[k] = bestDenom;
+		sol[k] = best;
+		best = INT_MAX;
+	}
+	//Format Solution
+	solution = to_string(sol[problem]) + " cents = ";
+	int* denomCount = new int[denoms[denoms.size() - 1] + 1]();
+	//Find purse
+	while (problem != 0) {
+		denomCount[jmpSize[problem]]++;
+		problem -= jmpSize[problem];
+	}
+	//Format Purse output
+	for (int i = denoms.size() - 1; i >= 0; i--) {
+		if (denomCount[denoms[i]] != 0) {
+			solution += to_string(denoms[i]) + ":" + to_string(denomCount[denoms[i]]) + " ";
+		}
+	}
+	return solution;
+}
+
+string topDownMemo(vector <int> denoms, int problem, bool init) {
+	string solution;
+	int best = INT_MAX;
+	
+	//Only initialize array on first recursion
+	if (init) {
+		if (sol != nullptr) {
+			delete[] sol;
+		}
+		sol = new man_satchel[problem + 1]();
+		for (int i = 0; i <= problem; i++) {
+			sol[i].value = -1;
+			sol[i].coin.resize(denoms.size(), 0);
+		}
+	}
+
+	//Base
+	if (problem == 0) {
+		return to_string(problem);
+	}
+	//Check if solution is found
+	if (sol[problem].value != -1) {
+		return to_string(sol[problem].value);
+	}
+
+	//Iterate through each denom
+	for (int k = 0; k < denoms.size(); k++) {
+		int size = problem - denoms[k];
+		if (size < 0) {//Prevents evaluation of denoms that are too large
+			continue;
+		}
+		int coins = stoi(topDownMemo(denoms, size, false));
+		
+		if (coins != INT_MAX && (coins + 1) < best) {
+			best = coins + 1;
+			sol[problem].coin = sol[size].coin;
+            sol[problem].coin[k]++;
+		}
+	}
+	sol[problem].value = best;
+	return to_string(sol[problem].value);
+}
+
 string topDown(vector <int> denoms, int problem, bool init) {
 	string solution;
 	int best = INT_MAX;
@@ -105,7 +189,7 @@ int main() {
 
 	//Populate the problems vector with input lines from k to the end of input
 	vector <int> problems;
-	for (int i = 0; i < 100; i += 5) {
+	for (int i = 0; i < 1000; i += 5) {
 		problems.push_back(i);
 	}
 
@@ -113,14 +197,18 @@ int main() {
 
 	vector<pair<int, int> > deltaTimes;
 	for (int i = 0; i < problems.size(); i++) {
-	    if (problems[i] > 80) {
-	        continue;
-	    }
+	    // if (problems[i] > 70) {
+	    //     continue;
+	    // }
 		auto start = chrono::high_resolution_clock::now();
-		solutions.push_back(topDown(denoms, problems[i], true));
+		solutions.push_back(bottomUp(denoms, problems[i]));
+		//solutions.push_back(topDownMemo(denoms, problems[i], true));
+		//solutions.push_back(topDown(denoms, problems[i], true));
 		auto end = chrono::high_resolution_clock::now();
         auto timeDelta = chrono::duration_cast<chrono::microseconds>(end-start).count();
 		deltaTimes.emplace_back(problems[i], timeDelta);
+
+
 		// cout << problems[i] << " cents =";
 		// for (int j = denoms.size() - 1; j >= 0; j--) {
 		//     if(sol[problems[i]].coin[j]){
@@ -129,6 +217,6 @@ int main() {
         // }
         // cout << "\n";
 	}
-	write2CSV("TopDown", deltaTimes);
+	write2CSV("BottomUp", deltaTimes);
 	return 0;
 }

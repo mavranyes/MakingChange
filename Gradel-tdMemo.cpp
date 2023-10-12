@@ -126,17 +126,6 @@ int main() {
         }
         cout << "\n";
 	}
-	//cout << "sol size: " << sol.size() << endl;
-	// for (int i = 0; i < solutions.size(); i++) {
-	// 	//cout << "Solution for " << problems[i] << ": \n" << solutions[i] << "\n";
-	// 	cout << problems[i] << " cents =";
-	// 	for (int j = denoms.size() - 1; j >= 0; j--) {
-	// 	    if(sol[problems[i]].coin[j]){
-    //             cout << " " << denoms[j] << ":" << sol[problems[i]].coin[j];
-	// 	    }
-    //     }
-    //     cout << "\n";
-	// }
 
 	return 0;
 }
