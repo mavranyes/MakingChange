@@ -7,6 +7,8 @@
 
 using namespace std;
 
+//This class is used in the recursive functions
+//It fits right into the sol[] array to make implementation similar to BottomUp
 class man_satchel {
 public:
 	int value;
@@ -16,6 +18,7 @@ public:
 	}
 };
 
+//Static array so recursive calls don't need the whole array passed to them
 static man_satchel* sol = nullptr;
 
 string bottomUp(vector <int> denoms, int problem) {
@@ -26,6 +29,7 @@ string bottomUp(vector <int> denoms, int problem) {
 	sol[0] = 0;
 	jmpSize[0] = 0;
 	int best = INT_MAX;
+	//Loop structure exhibits the "Bottom Up" nature of this solution
 	for (int k = 1; k <= problem; k++) {
 		//Iterate through each denom
 		for (int i = 0; i < denoms.size(); i++) {
@@ -95,7 +99,7 @@ string topDownMemo(vector <int> denoms, int problem, bool init) {
 		if (coins != INT_MAX && (coins + 1) < best) {
 			best = coins + 1;
 			sol[problem].coin = sol[size].coin;
-            sol[problem].coin[k]++;
+            		sol[problem].coin[k]++;
 		}
 	}
 	sol[problem].value = best;
@@ -122,11 +126,7 @@ string topDown(vector <int> denoms, int problem, bool init) {
 	if (problem == 0) {
 		return to_string(problem);
 	}
-	//Check if solution is found
-	if (sol[problem].value != -1) {
-		//return to_string(sol[problem].value);
-	}
-
+	
 	//Iterate through each denom
 	for (int k = 0; k < denoms.size(); k++) {
 		int size = problem - denoms[k];
@@ -145,6 +145,7 @@ string topDown(vector <int> denoms, int problem, bool init) {
 	return to_string(sol[problem].value);
 }
 
+//Used to format data to put into graphs
 void write2CSV(const string &filename, const vector<pair<int, int> > &data){
     ofstream f(filename);
     if(!f.is_open()){
@@ -163,16 +164,16 @@ int main() {
 	string line = "";
 	vector <int> file;
 
-	
+	//Use this block to get input from test file
 	ifstream input("test.txt", ios::in);
 	while (getline(input, line)) {
 		file.push_back(stoi(line, nullptr, 10));
 	}
-
-	// From stdin
+	
+	// Use this block to use input from stdin
 	// int x;
 	// while (cin >> x) {
-    //  	file.push_back(x);
+    	//  	file.push_back(x);
 	// }
 
 	//Get n from the first line of the input
