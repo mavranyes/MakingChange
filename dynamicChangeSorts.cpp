@@ -206,18 +206,20 @@ int main() {
 		//solutions.push_back(topDownMemo(denoms, problems[i], true));
 		//solutions.push_back(topDown(denoms, problems[i], true));
 		auto end = chrono::high_resolution_clock::now();
-        auto timeDelta = chrono::duration_cast<chrono::microseconds>(end-start).count();
+        	auto timeDelta = chrono::duration_cast<chrono::microseconds>(end-start).count();
 		deltaTimes.emplace_back(problems[i], timeDelta);
 
-
-		// cout << problems[i] << " cents =";
-		// for (int j = denoms.size() - 1; j >= 0; j--) {
-		//     if(sol[problems[i]].coin[j]){
-        //         cout << " " << denoms[j] << ":" << sol[problems[i]].coin[j];
-		//     }
-        // }
-        // cout << "\n";
-	}
+		//Print formatted output
+		/*
+		cout << problems[i] << " cents =";
+		for (int j = denoms.size() - 1; j >= 0; j--) {
+			if(sol[problems[i]].coin[j]){
+				cout << " " << denoms[j] << ":" << sol[problems[i]].coin[j];
+			}
+		}
+		cout << "\n";
+		}*/
+	
 	write2CSV("BottomUp", deltaTimes);
 	return 0;
 }
